@@ -1,0 +1,96 @@
+/* rented.css */
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f9f9;
+  padding: 0px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+
+.house-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  height: 200px; /* Adjust the desired fixed height */
+  overflow: hidden;
+}
+
+.image-container {
+  width: 40%;
+  padding-right: 10px;
+  max-width: 100%; /* Set the maximum width of the image container */
+  max-height: 200px; /* Set the maximum height of the image container */
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Adjust to 'contain' for maintaining aspect ratio */
+}
+
+.text-container {
+  width: 60%;
+  border-left: 1px solid grey; /* Change the color and width as needed */
+  padding-left: 10px; /* Optional: Add padding to the left of the text */ 
+}
+
+.house-image {
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+.text-container p {
+  margin: 5px 0;
+}
+
+.house-details {
+  flex: 60%;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.house-details p {
+  margin: 0;
+}
+
+.house-details .text-bottom {
+  margin-top: auto;
+}
+
+.buttons {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.buttons button {
+  padding: 18px 36px;
+  font-size: 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.buttons button:hover {
+  background-color: #45a049;
+}
