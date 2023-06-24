@@ -28,7 +28,7 @@
     if ($stmt->execute()) {
         $stmt->close();
         $conn->close();
-        header("Location: index.php");
+        header("Location: index.html");
         exit();
     } else {
         echo "Error: " . $stmt->error;

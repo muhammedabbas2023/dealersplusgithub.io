@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>House Post Submission</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="rented.css">
-</head>
-   
-<body>
-   
-    <div class="buttons">
-        <button id="login-btn">Login</button>
-        <button id="signup-btn">Sign Up</button>
-    </div>
-
 <?php
 $servername = "localhost";
 $username = "root";
@@ -28,17 +13,12 @@ if ($conn->connect_error) {
 $sql = "SELECT id, name, mobile, location, rental_price, description, image1, image1_type, timestamp FROM users";
 $result = $conn->query($sql);
 
-echo "<div class='container'>";
-echo "<h1>House Available In Sahiwal For Rent:</h1>";
+$data = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // Check if an image is presented
         if (!empty($row['image1'])) {
-            echo "<div class='house-item'>";
-            
-            // Image container
-            echo "<div class='image-container'>";
             $imageType1 = $row['image1_type'];
             $imageData1 = base64_decode($row['image1']);
             
@@ -80,40 +60,27 @@ if ($result->num_rows > 0) {
             $compressedImageBase64 = base64_encode($compressedImageData);
             $compressedImageSrc = "data:image/jpeg;base64," . $compressedImageBase64;
             
-            // Display the compressed image
-            echo "<img src='" . $compressedImageSrc . "' alt='User Image 1' class='house-image'>";
-            
             // Clean up the resources
             imagedestroy($sourceImage);
             imagedestroy($compressedImage);
             
-            echo "</div>"; // Close image container
-            
-            // ...
-            
-            // Text container
-            echo "<div class='text-container'>";
-            echo "<p>ID: " . $row['id'] . "</p>";
-            echo "<p>Name: " . $row['name'] . "</p>";
-            echo "<p>Mobile: " . $row['mobile'] . "</p>";
-            echo "<p>Location: " . $row['location'] . "</p>";   
-            echo "<p>Rental Price: " . $row['rental_price'] . "</p>";
-            echo "<p>Description: " . $row['description'] . "</p>";
-            echo "</div>"; // Close text container
-            
-            echo "</div>"; // Close house-item container
+            // Add the data to the array
+            $data[] = array(
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'mobile' => $row['mobile'],
+                'location' => $row['location'],
+                'rental_price' => $row['rental_price'],
+                'description' => $row['description'],
+                'image1' => $compressedImageSrc
+            );
         }
     }
-} else {
-    echo "No users found.";
 }
 
-echo "</div>"; // Closing the main container
-
 $conn->close();
+
+// Encode the data as JSON and send the response
+header('Content-Type: application/json');
+echo json_encode($data);
 ?>
-
-
-<script src="rented.js"></script>
-</body>
-</html>
